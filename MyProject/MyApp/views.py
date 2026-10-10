@@ -1,6 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
+from .models import *
+from .forms import *
 
 # Create your views here.
 
 def home(request):
-    return render(request,"index.html")
+
+    myform = RegisterForms()
+
+    return render(request,"index.html",{'forms':myform})
