@@ -1,3 +1,65 @@
-{% extends "base.html"%}
+{% extends "base.html" %}
     {% block content %}
+    <style>
+        th{
+            text-align: center;
+        }
+    </style>
+        <div class="container-fluid">
+            <div class="col-md-offset-1 col-md-4">
+                <h3 class="page-header text-primary text-center"><i class="fa fa-users">Registration</i></h3>
+                <form  method="POST" autocomplete="off" action="addData">
+                    {% csrf_token%}
+                    {{forms}}
+                    <div class="pull-right" style="margin-top: 20px;">
+                        <input type="submit" class=" btn btn-danger" value="Clear">
+                        <input type="submit" class="btn btn-primary" value="Submit">
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-6">
+                {% if datas %}
+                <h3 class="page-header text-center text-primary"><i class="fa fa-users">View Registertion</i></h3>
+                {% if messages %}
+                    {% for message in messages %}
+                       {% if message.tags == 'error'%}
+                            <div class="alert alert-danger">
+                                {{ message }}
+                            </div>
+                        {% else %}
+                            <div class="alert alert-{{ message.tags }}">
+                                {{ message }}
+                            </div>
+                       {% endif %}
+                    {% endfor %}
+                {% endif %}
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center;">S.NO</th>
+                            <th>Name</th>
+                            <th>Contact</th>
+                            <th>Address</th>
+                            <th>EMail</th>
+                            <th>Update</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    {% for data in datas %}
+                        <tbody>
+                            <tr>
+                                <td style="text-align: center;">{{forloop.counter}}</td>
+                                <td style="text-align: center;">{{data.name}}</td>
+                                <td style="text-align: center;">{{data.contact}}</td>
+                                <td style="text-align: center;">{{data.address}}</td>
+                                <td style="text-align: center;">{{data.email}}</td>
+                                <td style="text-align: center;"><a href="updateData/{{data.id}}" class="btn btn-info">Update</a></td>
+                                <td style="text-align: center;"><a href="deleteData/{{data.id}}" class="btn btn-danger">Delete</a></td>
+                            </tr>
+                        </tbody>
+                    {% endfor %}
+                </table>
+                {% endif %}
+            </div>
+        </div>
     {% endblock %}
