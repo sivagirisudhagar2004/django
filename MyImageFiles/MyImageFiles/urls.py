@@ -17,8 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from MyImages import views
+from django.conf.urls import static
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.home, name="Home")
+    path('',views.home, name="Home"),
+    path('uploadImage',views.uploadImage, name="uploadImage"),
+    path('deletefile/<int:id>',views.deletefile, name="deletefile")
 ]
+
+urlpatterns += static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT )
