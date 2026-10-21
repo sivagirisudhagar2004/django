@@ -66,6 +66,26 @@ def deletefile(request,id):
 
     return redirect("Home")
 
+def deleteall(request):
+
+    if(request.method == "POST"):
+
+        my_id = request.POST.getlist('id[]')
+
+        for id in my_id:
+
+            data = MyfileUpload.objects.get(id = id)
+
+            data.delete()
+
+            os.remove(data.my_file.path)
+
+            messages.success(request,"File Deleted Successfully...!!!")
+            
+        return redirect("Home")
+
+
+
 
 
 
