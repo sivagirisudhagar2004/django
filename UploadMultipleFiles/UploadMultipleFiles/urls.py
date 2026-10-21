@@ -23,6 +23,9 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.home, name="Home"),
+    path("uploadfile/",views.uploadfile, name="uploadfile"),
+    path("deletefile/<int:id>",views.deletefile, name="deletefile"),
+    path("deleteall/",views.deleteall, name="deleteall")
     
 ]
 
