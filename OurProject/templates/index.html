@@ -1,1 +1,41 @@
 {% extends "base.html"%}
+    {% block content %}
+        <div class="container-fluied" style="margin-top: 50px;">
+            <div class="col-md-offset-3 col-md-5">
+                <h3 class="page-header text-primary text-center">Dynamic Rows</h3>
+                <table class="table table-bordered" id="mytable">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th>Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="text" name="" id="" class="form-control"></td>
+                            <td><input type="text" name="" id="" class="form-control"></td>
+                            <td><input type="button" name="" id="" class="btn btn-danger removeRow" value="Remove"></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3"><input type="button" name="" id="addRow" class="btn btn-primary" value="Add Row"></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function(){
+                $("#addRow").click(function(){
+                    var myRow = '<tr><td><input type="text" name="" id="" class="form-control"></td><td><input type="text" name="" id="" class="form-control"></td><td><input type="button" name="" id="" class="btn btn-danger removeRow" value="Remove"></td></tr>'
+
+                    $("#mytable tbody").append(myRow);
+                });
+                $("body").on("click",".removeRow",function(){
+                    $(this).closest("tr").remove();
+                });
+            });
+        </script>
+    {% endblock %}
